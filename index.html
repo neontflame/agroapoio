@@ -3,258 +3,205 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AgroApoio - Soluções Completas para o Campo</title>
+    <title>AgroApoio - Conectando Agricultores e Consumidores</title>
     <link rel="stylesheet" href="styles.css">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
 <body>
-    <!-- Header -->
-    <header class="header">
-        <nav class="navbar">
-            <div class="nav-container">
-                <div class="nav-logo">
-                    <h2>AgroApoio</h2>
-                </div>
-                <ul class="nav-menu">
-                    <li class="nav-item">
-                        <a href="#home" class="nav-link">Início</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#about" class="nav-link">Sobre</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#services" class="nav-link">Serviços</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#products" class="nav-link">Produtos</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#contact" class="nav-link">Contato</a>
-                    </li>
-                </ul>
-                <div class="hamburger">
-                    <span class="bar"></span>
-                    <span class="bar"></span>
-                    <span class="bar"></span>
-                </div>
+    <header>
+        <nav class="container">
+            <div class="logo">AgroApoio</div>
+            <div class="nav-links">
+                <a href="#home" onclick="showSection('home')">Início</a>
+                <a href="#products" onclick="showSection('products')">Produtos</a>
+                <a href="#about">Sobre</a>
+                <a href="#contact">Contato</a>
+            </div>
+            <div class="auth-buttons">
+                <button class="btn btn-secondary" onclick="openModal('loginModal')">Entrar</button>
+                <button class="btn btn-primary" onclick="openModal('registerModal')">Cadastrar</button>
             </div>
         </nav>
     </header>
 
-    <!-- Hero Section -->
-    <section id="home" class="hero">
-        <div class="hero-content">
-            <h1>Soluções Completas para o Agronegócio</h1>
-            <p>Oferecemos tecnologia, consultoria e produtos de qualidade para maximizar a produtividade do seu campo</p>
-            <div class="hero-buttons">
-                <a href="#services" class="btn btn-primary">Nossos Serviços</a>
-                <a href="#contact" class="btn btn-secondary">Entre em Contato</a>
+    <main>
+        <!-- Home Section -->
+        <section id="home" class="home-section">
+            <div class="hero">
+                <div class="container">
+                    <h1>Conectando Agricultores e Consumidores</h1>
+                    <p>Descubra produtos frescos diretamente dos pequenos produtores da sua região</p>
+                    <button class="btn btn-primary" onclick="showSection('products')">Ver Produtos</button>
+                </div>
             </div>
-        </div>
-        <div class="hero-image">
-            <img src="/placeholder.svg?height=500&width=600" alt="Agronegócio" />
-        </div>
-    </section>
 
-    <!-- About Section -->
-    <section id="about" class="about">
-        <div class="container">
-            <div class="section-header">
-                <h2>Sobre o AgroApoio</h2>
-                <p>Startup com o intuito de ajudar o setor agrícola</p>
-            </div>
-            <div class="about-content">
-                <div class="about-text">
-                    <h3>Nossa História</h3>
-                    <p>O AgroApoio nasceu da paixão pelo campo e do compromisso em oferecer soluções inovadoras para o setor agrícola. Com a confiança de nossos clientes, nos consolidamos como referência em consultoria, tecnologia e fornecimento de produtos para o agronegócio.</p>
-                    <div class="stats">
-                        <div class="stat">
-                            <h4>500+</h4>
-                            <p>Clientes Atendidos</p>
+            <div class="categories">
+                <div class="container">
+                    <h2>Categorias</h2>
+                    <div class="category-grid">
+                        <div class="category-card" onclick="filterProducts('bebidas')">
+                            <div class="category-icon">🥤</div>
+                            <h3>Bebidas</h3>
+                            <p>Sucos naturais, vinhos artesanais e outras bebidas</p>
                         </div>
-                        <div class="stat">
-                            <h4>1000+</h4>
-                            <p>Projetos Realizados</p>
+                        <div class="category-card" onclick="filterProducts('verduras')">
+                            <div class="category-icon">🥬</div>
+                            <h3>Verduras</h3>
+                            <p>Folhas frescas direto da horta</p>
+                        </div>
+                        <div class="category-card" onclick="filterProducts('legumes')">
+                            <div class="category-icon">🥕</div>
+                            <h3>Legumes</h3>
+                            <p>Legumes frescos e orgânicos</p>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Services Section -->
-    <section id="services" class="services">
-        <div class="container">
-            <div class="section-header">
-                <h2>Nossos Serviços</h2>
-                <p>Soluções completas para todas as etapas do seu negócio agrícola</p>
+        <!-- Products Section -->
+        <section id="products" class="products-section hidden">
+            <div class="container">
+                <h2>Produtos Disponíveis</h2>
+                <div class="form-group">
+                    <select id="categoryFilter" onchange="filterProducts(this.value)">
+                        <option value="">Todas as categorias</option>
+                        <option value="bebidas">Bebidas</option>
+                        <option value="verduras">Verduras</option>
+                        <option value="legumes">Legumes</option>
+                    </select>
+                </div>
+                <div id="productsGrid" class="products-grid"></div>
             </div>
-            <div class="services-grid">
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-seedling"></i>
-                    </div>
-                    <h3>Consultoria Agrícola</h3>
-                    <p>Orientação especializada para otimizar sua produção e reduzir custos operacionais.</p>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-tractor"></i>
-                    </div>
-                    <h3>Tecnologia no Campo</h3>
-                    <p>Implementação de tecnologias avançadas para agricultura de precisão.</p>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-chart-line"></i>
-                    </div>
-                    <h3>Gestão Rural</h3>
-                    <p>Sistemas de gestão para controle financeiro e operacional da propriedade.</p>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-leaf"></i>
-                    </div>
-                    <h3>Sustentabilidade</h3>
-                    <p>Práticas sustentáveis para preservação ambiental e certificações.</p>
-                </div>
-            </div>
-        </div>
-    </section>
+        </section>
+    </main>
 
-    <!-- Products Section -->
-    <section id="products" class="products">
-        <div class="container">
-            <div class="section-header">
-                <h2>Nossos Produtos</h2>
-                <p>Linha completa de produtos para o agronegócio</p>
-            </div>
-            <div class="products-grid">
-                <div class="product-card">
-                    <img src="/placeholder.svg?height=200&width=300" alt="Sementes" />
-                    <div class="product-content">
-                        <h3>Sementes Selecionadas</h3>
-                        <p>Variedades de alta qualidade e produtividade para diferentes culturas.</p>
-                        <a href="#" class="btn btn-outline">Saiba Mais</a>
-                    </div>
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('loginModal')">&times;</span>
+            <h2>Entrar</h2>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="loginEmail">Email:</label>
+                    <input type="email" id="loginEmail" required>
                 </div>
-                <div class="product-card">
-                    <img src="/placeholder.svg?height=200&width=300" alt="Fertilizantes" />
-                    <div class="product-content">
-                        <h3>Fertilizantes</h3>
-                        <p>Nutrição completa para suas plantas com produtos de alta eficiência.</p>
-                        <a href="#" class="btn btn-outline">Saiba Mais</a>
-                    </div>
+                <div class="form-group">
+                    <label for="loginPassword">Senha:</label>
+                    <input type="password" id="loginPassword" required>
                 </div>
-                <div class="product-card">
-                    <img src="/placeholder.svg?height=200&width=300" alt="Defensivos" />
-                    <div class="product-content">
-                        <h3>Defensivos Agrícolas</h3>
-                        <p>Proteção eficaz contra pragas e doenças com produtos registrados.</p>
-                        <a href="#" class="btn btn-outline">Saiba Mais</a>
-                    </div>
+                <div class="form-actions">
+                    <button type="button" onclick="closeModal('loginModal')" class="btn btn-secondary">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Entrar</button>
                 </div>
-            </div>
+            </form>
         </div>
-    </section>
+    </div>
 
-    <!-- Contact Section -->
-    <section id="contact" class="contact">
-        <div class="container">
-            <div class="section-header">
-                <h2>Entre em Contato</h2>
-                <p>Estamos prontos para atender suas necessidades</p>
-            </div>
-            <div class="contact-content">
-                <div class="contact-info">
-                    <div class="contact-item">
-                        <i class="fas fa-map-marker-alt"></i>
-                        <div>
-                            <h4>Endereço</h4>
-                            <p>Rua do Agronegócio, 123<br>Centro - Cidade/Estado</p>
-                        </div>
-                    </div>
-                    <div class="contact-item">
-                        <i class="fas fa-phone"></i>
-                        <div>
-                            <h4>Telefone</h4>
-                            <p>(41) 9999-9999</p>
-                        </div>
-                    </div>
-                    <div class="contact-item">
-                        <i class="fas fa-envelope"></i>
-                        <div>
-                            <h4>E-mail</h4>
-                            <p>contato@agroapoio.com.br</p>
-                        </div>
-                    </div>
+    <!-- Register Modal -->
+    <div id="registerModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('registerModal')">&times;</span>
+            <h2>Cadastrar</h2>
+            <form id="registerForm">
+                <div class="form-group">
+                    <label for="userType">Tipo de usuário:</label>
+                    <select id="userType" required onchange="toggleFarmerFields()">
+                        <option value="">Selecione</option>
+                        <option value="cliente">Cliente</option>
+                        <option value="vendedor">Vendedor/Agricultor</option>
+                    </select>
                 </div>
-                <form class="contact-form">
+                <div class="form-group">
+                    <label for="registerName">Nome:</label>
+                    <input type="text" id="registerName" required>
+                </div>
+                <div class="form-group">
+                    <label for="registerEmail">Email:</label>
+                    <input type="email" id="registerEmail" required>
+                </div>
+                <div class="form-group">
+                    <label for="registerPhone">Telefone:</label>
+                    <input type="tel" id="registerPhone" required>
+                </div>
+                <div class="form-group">
+                    <label for="registerPassword">Senha:</label>
+                    <input type="password" id="registerPassword" required>
+                </div>
+                <div id="farmerFields" class="hidden">
                     <div class="form-group">
-                        <input type="text" placeholder="Seu Nome" required>
+                    <label for="farmerPage">Nome da Página do Produtor:</label>
+                    <input type="text" id="farmerPage" placeholder="ex: sitiodaserra">
+                    <small>Será usado como link para sua página (somente letras e números)</small>
+                </div>
+                    <div class="form-group">
+                        <label for="farmAddress">Endereço da Propriedade:</label>
+                        <textarea id="farmAddress" required></textarea>
                     </div>
                     <div class="form-group">
-                        <input type="email" placeholder="Seu E-mail" required>
+                        <label for="farmerCategories">Categorias de Produtos:</label>
+                        <div class="checkbox-group">
+                            <label><input type="checkbox" name="farmerCategories" value="bebidas"> Bebidas</label>
+                            <label><input type="checkbox" name="farmerCategories" value="verduras"> Verduras</label>
+                            <label><input type="checkbox" name="farmerCategories" value="legumes"> Legumes</label>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <input type="tel" placeholder="Seu Telefone">
-                    </div>
-                    <div class="form-group">
-                        <textarea placeholder="Sua Mensagem" rows="5" required></textarea>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Enviar Mensagem</button>
-                </form>
-            </div>
+                </div>
+                <div class="form-actions">
+                    <button type="button" onclick="closeModal('registerModal')" class="btn btn-secondary">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Cadastrar</button>
+                </div>
+            </form>
         </div>
-    </section>
+    </div>
 
-    <!-- Footer -->
-    <footer class="footer">
+    <!-- Add Product Modal -->
+    <div id="addProductModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('addProductModal')">&times;</span>
+            <h2>Adicionar Produto</h2>
+            <form id="addProductForm">
+                <div class="form-group">
+                    <label for="productName">Nome do Produto:</label>
+                    <input type="text" id="productName" required>
+                </div>
+                <div class="form-group">
+                    <label for="productCategory">Categoria:</label>
+                    <select id="productCategory" required>
+                        <option value="">Selecione</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="productPrice">Preço:</label>
+                    <input type="number" id="productPrice" step="0.01" required>
+                </div>
+                <div class="form-group">
+                    <label for="productUnit">Unidade:</label>
+                    <select id="productUnit" required>
+                        <option value="kg">kg</option>
+                        <option value="g">g</option>
+                        <option value="unidade">unidade</option>
+                        <option value="litro">litro</option>
+                        <option value="ml">ml</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="productDescription">Descrição:</label>
+                    <textarea id="productDescription"></textarea>
+                </div>
+                <div class="form-actions">
+                    <button type="button" onclick="closeModal('addProductModal')" class="btn btn-secondary">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Adicionar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <footer>
         <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h3>AgroApoio</h3>
-                    <p>Soluções completas para o agronegócio com qualidade e confiança.</p>
-                    <div class="social-links">
-                        <a href="#"><i class="fab fa-facebook"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-linkedin"></i></a>
-                        <a href="#"><i class="fab fa-youtube"></i></a>
-                    </div>
-                </div>
-                <div class="footer-section">
-                    <h4>Serviços</h4>
-                    <ul>
-                        <li><a href="#">Consultoria Agrícola</a></li>
-                        <li><a href="#">Tecnologia no Campo</a></li>
-                        <li><a href="#">Gestão Rural</a></li>
-                        <li><a href="#">Sustentabilidade</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h4>Produtos</h4>
-                    <ul>
-                        <li><a href="#">Sementes</a></li>
-                        <li><a href="#">Fertilizantes</a></li>
-                        <li><a href="#">Defensivos</a></li>
-                        <li><a href="#">Equipamentos</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h4>Contato</h4>
-                    <ul>
-                        <li><i class="fas fa-phone"></i> (41) 9999-9999</li>
-                        <li><i class="fas fa-envelope"></i> contato@agroapoio.com.br</li>
-                        <li><i class="fas fa-map-marker-alt"></i> Rua do Agronegócio, 123</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2025 AgroApoio. Todos os direitos reservados.</p>
-            </div>
+            <p>&copy; 2025 AgroApoio. Todos os direitos reservados.</p>
         </div>
     </footer>
 
-    <script src="script.js"></script>
+    <script src="index.js"></script>
 </body>
 </html>
