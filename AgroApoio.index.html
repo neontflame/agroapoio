@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AgroApoio - Login e Cadastro</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>AgroApoio</h1>
+
+    <div class="tabs">
+      <button id="btn-login" class="active">Login</button>
+      <button id="btn-register">Cadastrar</button>
+    </div>
+
+    <form id="form-login" class="form active">
+      <input id="login-username" type="text" placeholder="Usuário" required />
+      <input id="login-password" type="password" placeholder="Senha" required />
+      <button type="submit">Entrar</button>
+      <p id="login-feedback" class="feedback"></p>
+    </form>
+
+    <form id="form-register" class="form">
+      <input id="register-username" type="text" placeholder="Usuário" required />
+      <input id="register-email" type="email" placeholder="Email" required />
+      <input id="register-password" type="password" placeholder="Senha" required />
+      <input
+        id="register-password-confirm"
+        type="password"
+        placeholder="Confirme a Senha"
+        required
+      />
+      <button type="submit">Cadastrar</button>
+      <p id="register-feedback" class="feedback"></p>
+    </form>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
